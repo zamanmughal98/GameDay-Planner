@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Game & Day Planner</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Select a Game & Day</h1>
+    <section class="container">
+      <div class="game-container" id="game-container">
+        <div class="game-category" id="game-category"></div>
+      </div>
+
+      <div class="day-container" id="day-container">
+        <h2>Day</h2>
+
+        <div class="day-selection" id="day-selection"></div>
+      </div>
+    </section>
+
+    <section class="summary-box" id="summary-box">
+      <h2>Summary</h2>
+      <p id="selected-category">CATEGORY<span id="category"></span></p>
+      <p id="selected-game">GAME<span id="game"></span></p>
+      <p id="selected-day">DAY<span id="day"></span></p>
+    </section>
+
+    <script src="JsScript.js"></script>
+  </body>
+</html>
