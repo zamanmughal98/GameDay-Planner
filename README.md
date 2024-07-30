@@ -1,40 +1,52 @@
-﻿# Country-City-Picker
+﻿# Game & Day Selector - README
 
-This project demonstrates a dynamic dropdown selection system using HTML, CSS, and JavaScript. The primary objective is to provide a user-friendly interface where users can select a country from one dropdown and subsequently see the cities related to that country in another dropdown.
+## Overview
+
+GameDay Selector is a web-based application that allows users to select their favorite game and preferred day of the week. The application features a responsive and visually appealing interface with radio buttons for game and day selection, and a summary box displaying the selected options.
 
 # Features
 
-_Dynamic Dropdowns: Populate city dropdown based on the selected country._
-_User-Friendly Interface: Clear and vibrant design for better user experience._
-_Custom Styling: Enhanced UI with bold and vibrant design, custom hover effects, and visually appealing dropdowns._
-_Responsive Design: Ensures the layout is adaptable and looks great on various screen sizes._
+_Categorized Game Selection: Choose from a variety of board games, card games, and video games._
+_Day Selection: Pick any day of the week._
+_Summary Box: View the selected game category, game, and day in a neat summary box._
+_Responsive Design: Adaptable layout for both desktop and mobile devices._
+_Visual Feedback: Hover and selected states for labels to enhance user interaction._
 
 # Technologies Used
 
-### HTML: Structure of the webpage.
+#### HTML: Structure and layout of the application.
 
-### CSS: Styling to make the dropdowns and the overall page visually appealing.
+#### CCSS: Styling for a visually appealing and responsive design.
 
-### JavaScript: Logic to handle the dynamic population of the city dropdown based on the selected country.
+#### JavaScript: Dynamic behavior for game and day selection, and updating the summary box.
 
-# Project Structure
+# USage
 
-### index.html: The main HTML file containing the structure of the dropdowns.###
+_Open the application in a web browser._
+_Select a game category to view the list of available games._
+_Choose your favorite game by clicking on the corresponding radio button or label._
+_Select a day of the week by clicking on the corresponding radio button or label._
+_View your selections in the summary box displayed at the bottom of the page._
 
-### styles.css: The CSS file that contains the styling for the dropdowns and other elements.###
-
-### JsScript.js: The JavaScript file that contains the logic for populating and managing the dropdowns.###
-
-# How to Use
+# Installation
 
 _Clone the repository:_
-_git clone https://github.com/zamanmughal98/Country-City-Picker.git_
+_git clone https://github.com/zamanmughal98/GameDay-Planner.git_
 _Open the index.html file in a web browser to see the dropdowns in action._
 
 # Customization
 
-Feel free to customize the country and city list in the JsScript.js file and the styles in styles.css to fit your needs.
+To customize the game categories, games, and days of the week:
+
+_Open JsScript.js._
+_Modify the games object to add or remove game categories and games._
+_Modify the daysOfWeek array to add or remove days._
 
 # Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+Contributions are welcome! To contribute:
+
+_Fork the repository._
+_Create a new branch for your feature or bugfix._
+_Commit your changes._
+_Push your branch and create a pull request._
