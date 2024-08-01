@@ -45,20 +45,50 @@ const selection = {
   day: 'None',
 };
 
-updateSummaryBox();
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.getElementById('theme-toggle-button');
+  const themeText = toggleButton.querySelector('span');
 
-function updateSummaryBox() {
+  const toggleTheme = () => {
+    const currentTheme = document.body.dataset.theme || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    toggleButton.classList.toggle('active', newTheme === 'dark');
+    themeText.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+
+    document.body.dataset.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+  };
+
+  const initializeTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    }
+  };
+
+  const applyTheme = (theme) => {
+    document.body.dataset.theme = theme;
+    toggleButton.classList.toggle('active', theme === 'dark');
+    themeText.textContent = theme === 'dark' ? 'Light' : 'Dark';
+  };
+
+  initializeTheme();
+  toggleButton.addEventListener('click', toggleTheme);
+});
+
+const updateSummaryBox = () => {
   document.getElementById('category').textContent = selection.category;
   document.getElementById('game').textContent = selection.game;
   document.getElementById('day').textContent = selection.day;
-}
+};
 
-function handleRadioChange(radio, category) {
+const handleRadioChange = (radio, category) => {
   if (radio.name === 'game') updateSelectedOptionForGame(radio, category);
   else if (radio.name === 'day') updateSelectedOptionForDay(radio);
 
   updateSummaryBox();
-}
+};
 
 const handleToggleClasses = (element, className, targer, searched) => {
   if (searched === targer) {
@@ -143,3 +173,5 @@ daysOfWeek.forEach((day) => {
   radioDiv.appendChild(label);
   daySelectionDiv.appendChild(radioDiv);
 });
+
+updateSummaryBox();
