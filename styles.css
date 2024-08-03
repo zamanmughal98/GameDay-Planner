@@ -278,7 +278,3 @@ input[type='radio']:hover {
   background: var(--summary-box-alt-background-color);
   white-space: nowrap;
 }
-
-.summary-box p:nth-child(odd) {
-  border: 2px solid var(--button-background-color);
-}

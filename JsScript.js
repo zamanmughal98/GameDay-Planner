@@ -45,38 +45,6 @@ const selection = {
   day: 'None',
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  const toggleButton = document.getElementById('theme-toggle-button');
-  const themeText = toggleButton.querySelector('span');
-
-  const toggleTheme = () => {
-    const currentTheme = document.body.dataset.theme || 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-    toggleButton.classList.toggle('active', newTheme === 'dark');
-    themeText.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
-
-    document.body.dataset.theme = newTheme;
-    localStorage.setItem('theme', newTheme);
-  };
-
-  const initializeTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      applyTheme(savedTheme);
-    }
-  };
-
-  const applyTheme = (theme) => {
-    document.body.dataset.theme = theme;
-    toggleButton.classList.toggle('active', theme === 'dark');
-    themeText.textContent = theme === 'dark' ? 'Light' : 'Dark';
-  };
-
-  initializeTheme();
-  toggleButton.addEventListener('click', toggleTheme);
-});
-
 const updateSummaryBox = () => {
   document.getElementById('category').textContent = selection.category;
   document.getElementById('game').textContent = selection.game;
@@ -101,6 +69,9 @@ const updateSelectedOptionForGame = ({ id, name, value }, category) => {
   selection.game = value;
   selection.category = category;
 
+  localStorage.setItem('game', value);
+  localStorage.setItem('category', category);
+
   document.querySelectorAll(`input[name="${name}"]`).forEach((i) => {
     const label = document.querySelector(`label[for="${i.id}"]`);
     handleToggleClasses(label, 'selectedLabelForGame', id, i.id);
@@ -108,6 +79,8 @@ const updateSelectedOptionForGame = ({ id, name, value }, category) => {
 };
 const updateSelectedOptionForDay = ({ id, name, value }) => {
   selection.day = value;
+
+  localStorage.setItem('day', value);
 
   document.querySelectorAll(`input[name="${name}"]`).forEach((i) => {
     const label = document.querySelector(`label[for="${i.id}"]`);
@@ -174,4 +147,72 @@ daysOfWeek.forEach((day) => {
   daySelectionDiv.appendChild(radioDiv);
 });
 
-updateSummaryBox();
+const getRadioButtonchecked = (id, value) => {
+  document.querySelector(
+    `input[name="${id}"][value="${value}"]`,
+  ).checked = true;
+};
+const DayLocalStorageHandler = () => {
+  const selectedDay = localStorage.getItem('day');
+
+  if (selectedDay) {
+    getRadioButtonchecked('day', selectedDay);
+    updateSelectedOptionForDay({
+      id: selectedDay,
+      name: 'day',
+      value: selectedDay,
+    });
+  }
+};
+
+const gameCategoryLocalStorageHandler = () => {
+  const selectedCategory = localStorage.getItem('category');
+  const selectedGame = localStorage.getItem('game');
+
+  if (selectedCategory && selectedGame) {
+    getRadioButtonchecked('game', selectedGame);
+
+    updateSelectedOptionForGame(
+      {
+        id: `${selectedCategory}-${selectedGame}`,
+        name: 'game',
+        value: selectedGame,
+      },
+      selectedCategory,
+    );
+  }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.getElementById('theme-toggle-button');
+  const themeText = toggleButton.querySelector('span');
+
+  const toggleTheme = () => {
+    const currentTheme = document.body.dataset.theme || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    toggleButton.classList.toggle('active', newTheme === 'dark');
+    themeText.textContent = newTheme === 'dark' ? 'Light' : 'Dark';
+
+    document.body.dataset.theme = newTheme;
+    localStorage.setItem('theme', newTheme);
+  };
+
+  const applyTheme = (theme) => {
+    document.body.dataset.theme = theme;
+    toggleButton.classList.toggle('active', theme === 'dark');
+    themeText.textContent = theme === 'dark' ? 'Light' : 'Dark';
+  };
+  const initializeTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    }
+  };
+
+  toggleButton.addEventListener('click', toggleTheme);
+  initializeTheme();
+  DayLocalStorageHandler();
+  gameCategoryLocalStorageHandler();
+  updateSummaryBox();
+});
